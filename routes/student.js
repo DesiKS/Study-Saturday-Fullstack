@@ -17,36 +17,45 @@ router.get('/', function(req, res, next) {
   );
 });
 
-// router.post('/', async function(req, res, next) {
-//   try {
-//     const newStudent = await Student.create(req.body);
-//     res.status(200).json(newStudent);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+router.post('/', async function(req, res, next) {
+  try {
+    const newStudent = await Student.create(req.body);
+    await Test.create({
+      subject: 'Testing',
+      grade: 99,
+      studentId: newStudent.id
+    });
 
-router.post('/', function(req, res, next) {
-  Student.create(req.body)
-    .then(studentNoTest => {
-      return Promise.all([
-        Test.create({
-          subject: 'Programming',
-          grade: 90,
-          studentId: studentNoTest.id
-        }),
-        studentNoTest
-      ]);
-    })
-    .then(([test, student]) => {
-      Student.findById(student.id, { include: { all: true } }).then(
-        foundStudent => {
-          res.json(foundStudent);
-        }
-      );
-    })
-    .catch(next);
+    const foundStudent = await Student.findByPk(newStudent.id, {
+      include: [{ model: Test }] // include: [{ all: true }]
+    });
+    res.status(200).json(foundStudent);
+  } catch (error) {
+    next(error);
+  }
 });
+
+// router.post('/', function(req, res, next) {
+//   Student.create(req.body)
+//     .then(studentNoTest => {
+//       return Promise.all([
+//         Test.create({
+//           subject: 'Programming',
+//           grade: 90,
+//           studentId: studentNoTest.id
+//         }),
+//         studentNoTest
+//       ]);
+//     })
+//     .then(([test, student]) => {
+//       Student.findById(student.id, { include: { all: true } }).then(
+//         foundStudent => {
+//           res.json(foundStudent);
+//         }
+//       );
+//     })
+//     .catch(next);
+// });
 
 router.put('/:id', function(req, res, next) {
   Student.update(req.body, {

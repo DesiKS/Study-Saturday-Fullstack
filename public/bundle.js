@@ -40489,7 +40489,7 @@ var NewStudentForm = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         "form",
-        null,
+        { onSubmit: this.handleSubmit },
         _react2.default.createElement(
           "label",
           null,

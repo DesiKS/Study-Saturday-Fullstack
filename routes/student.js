@@ -17,12 +17,21 @@ router.get('/', function(req, res, next) {
   );
 });
 
+router.post('/', async function(req, res, next) {
+  try {
+    const newStudent = await Student.create(req.body);
+    res.status(200).json(newStudent);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.put('/:id', function(req, res, next) {
   Student.update(req.body, {
     where: {
-      id: req.params.id,
+      id: req.params.id
     },
-    returning: true,
+    returning: true
   })
     .then(test => res.status(201).json(test[1][0]))
     .catch(next);
@@ -31,8 +40,8 @@ router.put('/:id', function(req, res, next) {
 router.delete('/:id', function(req, res, next) {
   Student.destroy({
     where: {
-      id: req.params.id,
-    },
+      id: req.params.id
+    }
   })
     .then(() => {
       res.sendStatus(204);

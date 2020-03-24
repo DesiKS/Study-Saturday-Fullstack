@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import StudentList from './StudentList.js';
 import SingleStudent from './SingleStudent.js';
+import NewStudentForm from './NewStudentForm'; //<----- CYCLE 1!!!!
 
 export default class Main extends Component {
   constructor(props) {
@@ -10,14 +11,22 @@ export default class Main extends Component {
     this.state = {
       students: [],
       selectedStudent: {},
+      showStudent: false //<----- CYCLE 1!!!!
     };
-
+    this.handleClick = this.handleClick.bind(this); //<----- CYCLE 1!!!!
     this.selectStudent = this.selectStudent.bind(this);
   }
 
   componentDidMount() {
     this.getStudents();
   }
+  // CYCLE 1 BELOW
+  handleClick() {
+    return this.setState({
+      showStudent: !this.state.showStudent
+    });
+  }
+  //CYCLE 1 ABOVE
 
   async getStudents() {
     console.log('fetching');
@@ -31,7 +40,7 @@ export default class Main extends Component {
 
   selectStudent(student) {
     return this.setState({
-      selectedStudent: student,
+      selectedStudent: student
     });
   }
 
@@ -39,6 +48,12 @@ export default class Main extends Component {
     return (
       <div>
         <h1>Students</h1>
+        {/* CYCLE 1 BELOW */}
+        <button onClick={this.handleClick}>Add Student</button>
+        {this.state.showStudent ? (
+          <NewStudentForm addStudent={this.addStudent} />
+        ) : null}
+        {/* CYCLE 1 ABOVE */}
         <table>
           <thead>
             <tr>

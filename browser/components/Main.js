@@ -11,12 +11,29 @@ export default class Main extends Component {
     this.state = {
       students: [],
       selectedStudent: {},
-      showStudent: false,
+      showStudent: false
     };
 
     this.selectStudent = this.selectStudent.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    //CYCLE 3 BELOW
+    this.addStudent = this.addStudent.bind(this);
+    //CYCLE 3 ABOVE
   }
+
+  //CYCLE 3 BELOW
+  async addStudent(newStudentObj) {
+    try {
+      const { data } = await axios.post('/student', newStudentObj);
+      this.setState({
+        students: [...this.state.students, data],
+        showStudent: false
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  //CYCLE 3 ABOVE
 
   componentDidMount() {
     this.getStudents();
@@ -35,23 +52,27 @@ export default class Main extends Component {
 
   selectStudent(student) {
     return this.setState({
-      selectedStudent: student,
+      selectedStudent: student
     });
   }
 
   handleClick(e) {
     return this.setState({
-      showStudent: !this.state.showStudent,
+      showStudent: !this.state.showStudent
     });
   }
 
   render() {
-    console.log('this is the state in main', this.state);
+    // console.log('this is the state in main', this.state);
     return (
       <div>
         <h1>Students</h1>
         <button onClick={this.handleClick}>Add Student</button>
-        {this.state.showStudent ? <NewStudentForm /> : null}
+        {this.state.showStudent ? (
+          // CYCLE 3 BELOW
+          <NewStudentForm addStudent={this.addStudent} />
+        ) : // CYCLE 3 ABOVE
+        null}
         <table>
           <thead>
             <tr>

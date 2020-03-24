@@ -6,7 +6,7 @@ export default class NewStudentForm extends Component {
     this.state = {
       firstName: '',
       lastName: '',
-      email: '',
+      email: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -14,15 +14,18 @@ export default class NewStudentForm extends Component {
 
   handleChange(event) {
     this.setState({
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value
     });
   }
   handleSubmit(event) {
     event.preventDefault();
+    //CYCLE 3 BELOW
+    this.props.addStudent(this.state);
+    //CYCLE 3 ABOVE
     this.setState({
       firstName: '',
       lastName: '',
-      email: '',
+      email: ''
     });
   }
 

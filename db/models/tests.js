@@ -33,7 +33,7 @@ Test.findBySubject = function(type) {
   });
 };
 
-Test.belongsTo(Student, { as: 'student' });
-Student.hasMany(Test)
+Test.belongsTo(Student, { as: 'student' }); //one test can belong; to many Students
+Student.hasMany(Test); //but one student has one test
 
 module.exports = Test;

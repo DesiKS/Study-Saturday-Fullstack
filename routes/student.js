@@ -35,6 +35,13 @@ router.post('/', async function(req, res, next) {
   }
 });
 
+// http://localhost:3000/student
+// {
+// 	"firstName": "david",
+// 	"lastName" : "bowie",
+// 	"email": "david@email.com"
+// }
+
 // router.post('/', function(req, res, next) {
 //   Student.create(req.body)
 //     .then(studentNoTest => {

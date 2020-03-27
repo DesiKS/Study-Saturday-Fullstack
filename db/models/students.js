@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const Sequelize = require('sequelize');
 const db = require('../db');
@@ -22,7 +22,7 @@ const Student = db.define(
       }
     },
     fullName: {
-      type: Sequelize.VIRTUAL,
+      type: Sequelize.VIRTUAL, //virtual value not stored in the DB,
       get() {
         return `${this.firstName} ${this.lastName}`;
       }
@@ -43,6 +43,7 @@ const Student = db.define(
 );
 
 Student.prototype.initials = function() {
+  // instance
   return `${this.firstName[0]} ${this.lastName[0]}`;
 };
 

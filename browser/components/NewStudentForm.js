@@ -5,7 +5,7 @@ import React from 'react';
 export default class NewStudentForm extends React.Component {
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form>
         <label>
           First Name:
           <input type="text" name="firstName" />

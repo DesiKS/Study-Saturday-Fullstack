@@ -22,7 +22,7 @@ export default class Main extends Component {
   }
   // CYCLE 1 BELOW
   handleClick() {
-    return this.setState({
+    this.setState({
       showStudent: !this.state.showStudent
     });
   }

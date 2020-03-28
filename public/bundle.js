@@ -39312,7 +39312,7 @@ var Main = function (_Component) {
   }, {
     key: 'handleClick',
     value: function handleClick() {
-      return this.setState({
+      this.setState({
         showStudent: !this.state.showStudent
       });
     }
@@ -40489,7 +40489,7 @@ var NewStudentForm = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         "form",
-        { onSubmit: this.handleSubmit },
+        null,
         _react2.default.createElement(
           "label",
           null,
